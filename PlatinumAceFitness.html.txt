@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Platinum Ace Fitness</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='256' height='256' viewBox='0 0 256 256'%3E%3Crect width='256' height='256' rx='40' fill='%23000'/%3E%3Cg fill='%23d4af37' font-family='Arial Black, Arial, sans-serif' font-weight='900'%3E%3Ctext x='50%' y='56%' dominant-baseline='middle' text-anchor='middle' font-size='120'%3EPAF%3C/text%3E%3Crect x='52' y='158' width='152' height='6' rx='3'/%3E%3Crect x='44' y='150' width='10' height='22' rx='3'/%3E%3Crect x='202' y='150' width='10' height='22' rx='3'/%3E%3C/g%3E%3C/svg%3E">
+<style>
+:root{
+  --bg:#0b0b0b; --panel:#141414; --gold:#d4af37;
+  --text:#f1f1f1; --muted:#b8b8b8;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text)}
+header{background:linear-gradient(180deg,#000,#0d0d0d);border-bottom:1px solid #222;padding:14px 16px 10px;position:sticky;top:0;z-index:10}
+.brand{display:flex;align-items:center;gap:12px}
+.logo{width:40px;height:40px;border-radius:9px;border:1px solid #333;background:#000}
+.brand .title{font-weight:800;letter-spacing:.3px}
+.sub{color:var(--gold);font-size:12px;margin-top:2px}
+.header-bar{margin-top:8px;background:#0f0f0f;border:1px solid #222;border-radius:10px;padding:8px 10px;font-size:13px}
+nav{display:flex;overflow-x:auto;gap:8px;padding:10px 12px;background:#0b0b0b;position:sticky;top:70px;z-index:9;border-bottom:1px solid #1d1d1d}
+nav button{background:#121212;color:var(--text);border:1px solid #2a2a2a;padding:10px 12px;border-radius:10px;min-width:96px;font-weight:600}
+nav button.active{border-color:var(--gold);color:var(--gold)}
+.container{padding:14px}
+.card{background:var(--panel);border:1px solid #1f1f1f;border-radius:14px;padding:12px;margin-bottom:14px}
+.quote{color:var(--gold);font-style:italic;font-size:14px;margin-bottom:8px}
+.exercise{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px;border-bottom:1px solid #202020}
+.exercise:last-child{border-bottom:none}
+.exercise a{color:var(--muted);text-decoration:none;font-size:13px}
+.exercise a:active{color:var(--gold)}
+.checkbox{transform:scale(1.25);margin-right:6px}
+.btn{display:inline-block;padding:10px 14px;background:transparent;border:1px solid var(--gold);color:var(--gold);border-radius:10px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;font-size:12px}
+.btn.fill{background:var(--gold);color:#000}
+.row{display:flex;gap:10px;flex-wrap:wrap}
+.timer{font-size:28px;font-weight:800;text-align:center;padding:10px 0}
+.footer-space{height:60px}
+.tabbar{position:fixed;bottom:0;left:0;right:0;background:#0c0c0c;border-top:1px solid #222;display:flex;gap:8px;padding:8px}
+.tabbar button{flex:1}
+.label{font-size:12px;color:var(--muted)}
+input[type='number'],input[type='text']{background:#101010;color:var(--text);border:1px solid #242424;padding:10px;border-radius:10px;width:100%}
+.progress-entry{display:flex;gap:10px;align-items:center;margin-bottom:8px}
+.gallery{display:flex;flex-wrap:wrap;gap:8px}
+.gallery img{width:100px;height:100px;object-fit:cover;border-radius:10px;border:1px solid #333}
+hr.sep{border:none;border-top:1px solid #222;margin:10px 0}
+.small{font-size:12px;color:var(--muted)}
+svg.logo text{fill:#d4af37;font-weight:900}
+</style>
+</head>
+<body>
+<header>
+  <div class="brand">
+    <!-- Minimalist gold PAF emblem with a subtle barbell -->
+    <svg class="logo" viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg" aria-label="PAF logo">
+      <rect width="256" height="256" rx="24" fill="#000"/>
+      <text x="50%" y="54%" dominant-baseline="middle" text-anchor="middle" font-size="120" fill="#d4af37" font-family="Arial Black, Arial, sans-serif">PAF</text>
+      <rect x="52" y="172" width="152" height="6" rx="3" fill="#d4af37"/>
+      <rect x="44" y="164" width="10" height="22" rx="3" fill="#d4af37"/>
+      <rect x="202" y="164" width="10" height="22" rx="3" fill="#d4af37"/>
+    </svg>
+    <div>
+      <div class="title">Platinum Ace Fitness</div>
+      <div class="sub">90-Day Transformation</div>
+    </div>
+  </div>
+  <div class="header-bar">📊 <b>Calories:</b> 1,700–1,900/day &nbsp;&nbsp; | &nbsp;&nbsp; 🍗 <b>Protein:</b> 140–170g/day</div>
+</header>
+
+<nav></nav>
+
+<div id="screen-workouts" class="container">
+  <div class="card">
+    <div class="quote" id="quote">Motivation quote</div>
+    <div class="row" style="justify-content:space-between;align-items:center;">
+      <div id="day-title" style="font-weight:800;">Day</div>
+      <div>
+        <button class="btn" onclick="resetChecks()">Reset Week</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="row" style="gap:8px;justify-content:center;">
+      <button class="btn" onclick="startTimer(30)">30s</button>
+      <button class="btn" onclick="startTimer(60)">60s</button>
+      <button class="btn" onclick="startTimer(90)">90s</button>
+      <button class="btn" onclick="startTimer(120)">120s</button>
+      <button class="btn fill" onclick="startTimer(180)">3:00</button>
+    </div>
+    <div id="timer-display" class="timer">00:00</div>
+    <div class="small" style="text-align:center;">Rest timer (vibrates when done if supported)</div>
+  </div>
+
+  <div class="card" id="exercise-list"></div>
+  <div class="footer-space"></div>
+</div>
+
+<div id="screen-progress" class="container" style="display:none;">
+  <div class="card">
+    <div style="font-weight:800;margin-bottom:8px;">Progress Tracker</div>
+    <div class="row">
+      <div style="flex:1;">
+        <div class="label">Weight (lbs)</div>
+        <input id="log-weight" type="number" inputmode="decimal" placeholder="e.g., 170">
+      </div>
+      <div style="flex:1;">
+        <div class="label">Waist (in)</div>
+        <input id="log-waist" type="number" inputmode="decimal" placeholder="e.g., 34">
+      </div>
+    </div>
+    <div style="margin-top:10px;">
+      <button class="btn fill" onclick="addLog()">Save Log</button>
+    </div>
+    <hr class="sep">
+    <div id="progress-logs"></div>
+  </div>
+
+  <div class="card">
+    <div style="font-weight:800;margin-bottom:8px;">Photos</div>
+    <input id="photo-input" type="file" accept="image/*" capture="environment">
+    <div class="small">Photos are stored locally in your browser. They do not leave your device.</div>
+    <div class="gallery" id="photo-gallery" style="margin-top:10px;"></div>
+  </div>
+  <div class="footer-space"></div>
+</div>
+
+<div class="tabbar">
+  <button class="btn fill" onclick="showTab('workouts')">Workouts</button>
+  <button class="btn" onclick="showTab('progress')">Progress</button>
+</div>
+
+<script>
+const APP_KEY='paf_v1';
+const CHECKS_KEY=APP_KEY+'_checks';
+const LOGS_KEY=APP_KEY+'_logs';
+const PHOTOS_KEY=APP_KEY+'_photos';
+
+const QUOTES=[
+  "Discipline beats motivation. Show up.",
+  "The body achieves what the mind believes.",
+  "Small steps daily become big results.",
+  "Sweat is just fat crying.",
+  "Your only limit is you.",
+  "Consistency is the ultimate preworkout.",
+  "Earn your shower.",
+  "Strong shoulders. Strong frame. Strong mind."
+];
+
+const WORKOUTS={
+"Day 0 – Morning Routine":[
+["Hydration (16–20 oz water + pinch salt + lemon)","https://www.healthline.com/nutrition/lemon-water-morning"],
+["Arm circles – 30s forward, 30s backward","https://youtu.be/_VD7TwbK7R8"],
+["Hip circles – 30s","https://youtu.be/7sUX9YbV9Uo"],
+["Cat-cow stretch – 6–8 reps","https://youtu.be/kqnua4rHVVA"],
+["Push-ups or incline push-ups – 10–15","https://youtu.be/IODxDxX7oi4"],
+["Bodyweight squats – 15","https://youtu.be/aclHkVaku9U"],
+["Plank shoulder taps – 20 taps","https://youtu.be/UDtE7wQ5K4o"],
+["Mountain climbers – 30s","https://youtu.be/nmwgirgXLYM"],
+["Superman hold – 20s","https://youtu.be/z6PJMT2y8GQ"],
+["Cardio finisher – 2–3 min jacks/shadowboxing/walk","https://youtu.be/X2g780G-9rQ"]],
+"Day 1 – Push (Chest, Shoulders, Triceps)":[
+["Incline Dumbbell Press – 4×10","https://youtu.be/8iPEnn-ltC8"],
+["Seated Dumbbell Shoulder Press – 4×10","https://youtu.be/B-aVuyhvLHU"],
+["Dumbbell Side Lateral Raise – 4×12","https://youtu.be/3VcKaXpzqRo"],
+["Cable Chest Fly – 3×12","https://youtu.be/eozdVDA78K0"],
+["Tricep Rope Pushdown – 3×12","https://youtu.be/vB5OHsJ3EME"],
+["Plank – 3×30s","https://youtu.be/pSHjTRCQxIw"]],
+"Day 2 – Pull (Back, Biceps, Rear Delts)":[
+["Lat Pulldown (Wide Grip) – 4×10","https://youtu.be/CAwf7n6Luuc"],
+["Dumbbell Row – 4×10/side","https://youtu.be/pYcpY20QaE8"],
+["Face Pulls – 3×12","https://youtu.be/rep-qVOkqgk"],
+["Dumbbell Bicep Curl – 3×10","https://youtu.be/in7PaeYlhrM"],
+["Hammer Curl – 3×10","https://youtu.be/zC3nLlEvin4"],
+["Hanging Knee Raises – 3×12","https://youtu.be/bKE1uvnH5JY"]],
+"Day 3 – Legs":[
+["Barbell Back Squat – 4×10","https://youtu.be/SW_C1A-rejs"],
+["Romanian Deadlift – 4×10","https://youtu.be/_oyxCn2iSjU"],
+["Walking Lunges – 3×12/leg","https://youtu.be/D7KaRcUTQeE"],
+["Seated Calf Raise – 4×12","https://youtu.be/6eHkGLVnBEE"],
+["Leg Extension – 3×12","https://youtu.be/YyvSfVjQeL0"],
+["Bicycle Crunch – 3×20","https://youtu.be/Iwyvozckjak"]],
+"Day 4 – Swim / Cardio Day":[
+["Swimming Laps – 20–30 min","https://youtu.be/qR5h9F7n6Mg"],
+["Incline Treadmill Walk – 15–20 min","https://youtu.be/3OIj-EFDOsM"]],
+"Day 5 – Push (Shoulder Focus)":[
+["Overhead Press (Barbell) – 4×10","https://youtu.be/qEwKCR5JCog"],
+["Arnold Press – 4×10","https://youtu.be/3ml7BH7mNwQ"],
+["Side Lateral Raise – 4×12","https://youtu.be/3VcKaXpzqRo"],
+["Upright Row (Barbell/EZ) – 3×12","https://youtu.be/X1yq5Lt2yMs"],
+["Push-Ups – 3×12","https://youtu.be/IODxDxX7oi4"],
+["Side Plank – 3×20s/side","https://youtu.be/K2VljzCC16g"]],
+"Day 6 – Pull / Cardio Mix":[
+["Pull-Ups or Assisted – 4×6–8","https://youtu.be/eGo4IYlbE5g"],
+["Dumbbell Row – 4×10","https://youtu.be/pYcpY20QaE8"],
+["Cable Face Pull – 3×12","https://youtu.be/rep-qVOkqgk"],
+["Hammer Curl – 3×12","https://youtu.be/zC3nLlEvin4"],
+["Incline Treadmill Walk/Run – 15–20 min","https://youtu.be/3OIj-EFDOsM"]],
+"Day 7 – Rest / Sauna / Stretch":[
+["Light mobility – 10 min","https://youtu.be/c5TOlS_BttA"],
+["Sauna – optional 10–15 min","https://www.healthline.com/health/sauna-after-workout"],
+["Walk outdoors – 20–30 min","https://youtu.be/xRRS4TgYkyo"]]
+};
+
+function q(s,el=document){return el.querySelector(s)}
+function qa(s,el=document){return Array.from(el.querySelectorAll(s))}
+function weekIndex(){
+  const now=new Date(), onejan=new Date(now.getFullYear(),0,1);
+  return Math.ceil((((now-onejan)/86400000)+onejan.getDay()+1)/7);
+}
+function currentQuote(dayIndex){return QUOTES[(weekIndex()+dayIndex)%QUOTES.length]}
+
+function load(k, d){try{return JSON.parse(localStorage.getItem(k))??d}catch(e){return d}}
+function save(k, v){localStorage.setItem(k, JSON.stringify(v))}
+
+let currentDay=0;
+function setDay(i){
+  currentDay=i;
+  qa('nav button').forEach((b,idx)=>b.classList.toggle('active', idx===i));
+  renderDay(i);
+}
+function renderDay(i){
+  const names=Object.keys(WORKOUTS), name=names[i];
+  q('#day-title').textContent=name;
+  q('#quote').textContent='“'+currentQuote(i)+'”';
+  const wrap=q('#exercise-list'); wrap.innerHTML='';
+  const checks=load(CHECKS_KEY,{});
+
+  WORKOUTS[name].forEach(([label,url])=>{
+    const id=name+'::'+label, checked=!!checks[id];
+    const row=document.createElement('div'); row.className='exercise';
+
+    const left=document.createElement('label'); left.style.display='flex'; left.style.alignItems='center'; left.style.gap='8px';
+    const cb=document.createElement('input'); cb.type='checkbox'; cb.className='checkbox'; cb.checked=checked;
+    cb.addEventListener('change',()=>{const d=load(CHECKS_KEY,{}); d[id]=cb.checked; save(CHECKS_KEY,d)});
+    const text=document.createElement('span'); text.textContent=label;
+    left.appendChild(cb); left.appendChild(text);
+
+    const link=document.createElement('a'); link.href=url; link.target='_blank'; link.textContent='Video';
+    row.appendChild(left); row.appendChild(link); wrap.appendChild(row);
+  });
+}
+function resetChecks(){localStorage.removeItem(CHECKS_KEY); renderDay(currentDay)}
+
+let timerInterval=null, remaining=0;
+function startTimer(sec){
+  clearInterval(timerInterval); remaining=sec; q('#timer-display').textContent=formatTime(remaining);
+  timerInterval=setInterval(()=>{
+    remaining-=1;
+    if(remaining<=0){clearInterval(timerInterval); remaining=0; q('#timer-display').textContent='Done'; try{navigator.vibrate&&navigator.vibrate([150,80,150])}catch(e){}}
+    else q('#timer-display').textContent=formatTime(remaining);
+  },1000);
+}
+function formatTime(s){const m=Math.floor(s/60), ss=s%60; return String(m).padStart(2,'0')+':'+String(ss).padStart(2,'0')}
+
+function loadLogs(){return load(LOGS_KEY,[])}
+function saveLogs(v){save(LOGS_KEY,v)}
+function addLog(){
+  const w=parseFloat(q('#log-weight').value||''), ww=parseFloat(q('#log-waist').value||'');
+  if(isNaN(w)&&isNaN(ww)){alert('Enter weight and/or waist.');return}
+  const entry={date:new Date().toISOString(), weight:w, waist:ww};
+  const logs=loadLogs(); logs.unshift(entry); saveLogs(logs.slice(0,20));
+  q('#log-weight').value=''; q('#log-waist').value=''; renderProgress();
+}
+function renderProgress(){
+  const logs=loadLogs(), list=q('#progress-logs'); list.innerHTML='';
+  logs.slice(0,6).forEach(item=>{
+    const row=document.createElement('div'); row.className='progress-entry';
+    const date=new Date(item.date).toLocaleDateString();
+    row.innerHTML=`<div class='label'>${date}</div><div>Weight: <b>${item.weight||'-'}</b></div><div>Waist: <b>${item.waist||'-'}</b></div>`;
+    list.appendChild(row);
+  });
+  const photos=load(PHOTOS_KEY,[]), gal=q('#photo-gallery'); gal.innerHTML='';
+  photos.forEach((p,idx)=>{
+    const box=document.createElement('div');
+    const img=document.createElement('img'); img.src=p.data; img.alt='progress photo';
+    const del=document.createElement('button'); del.className='btn'; del.textContent='Delete'; del.style.marginTop='4px';
+    del.addEventListener('click',()=>{const arr=load(PHOTOS_KEY,[]); arr.splice(idx,1); save(PHOTOS_KEY,arr); renderProgress()});
+    box.appendChild(img); box.appendChild(del); gal.appendChild(box);
+  });
+}
+function addPhoto(file){
+  const reader=new FileReader();
+  reader.onload=()=>{const arr=load(PHOTOS_KEY,[]); arr.unshift({data:reader.result, date:new Date().toISOString()}); save(PHOTOS_KEY,arr.slice(0,40)); renderProgress()};
+  reader.readAsDataURL(file);
+}
+function showTab(which){
+  q('#screen-workouts').style.display=(which==='workouts')?'block':'none';
+  q('#screen-progress').style.display=(which==='progress')?'block':'none';
+}
+document.addEventListener('DOMContentLoaded',()=>{
+  const names=Object.keys(WORKOUTS), nav=q('nav'); nav.innerHTML='';
+  names.forEach((name,i)=>{const b=document.createElement('button'); b.textContent=name.split('–')[0].trim(); b.addEventListener('click',()=>setDay(i)); nav.appendChild(b)});
+  setDay(0); renderProgress();
+  q('#photo-input').addEventListener('change',(e)=>{const f=e.target.files[0]; if(f) addPhoto(f); e.target.value='';});
+});
+</script>
+</body>
+</html>
